@@ -197,7 +197,7 @@ def create(username, givenName, sn, ou, userPassword):
             command = ["gam","update","user",username,"suspended","off"]
             
             if getUserType(username) == 'STU':
-                command.extend(["org","/students.denison.edu"])
+                command.extend(["org","/students.university.edu"])
             else:
                 org = "/" + lookupDivision(ou)
                 command.extend(["org",org])
