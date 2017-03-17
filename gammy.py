@@ -6,7 +6,7 @@ via GAM tool. A properly installed and
 configured GAM (https://github.com/jay0lee/GAM)
 is required for operation. You will need to adjust
 the script to your GA stu/acad/admin org structure
-(search for .denison.edu in the code).
+(search for .university.edu in the code).
 
 Usage: 
     python gammy -f input.json -o output.csv
@@ -17,7 +17,7 @@ Options:
     -o --out	Output file (required)
 
 Environment specific script constants are stored in this 
-config file: gammysettings.py
+config file: gammy_settings.py
     
 Input:
 
@@ -86,7 +86,7 @@ def main(argv):
         datefmt='%Y-%m-%d %H:%M:%S')
 
     # Get constants from this settings file
-    config_file = 'gammysettings.py'
+    config_file = 'gammy_settings.py'
     
     if not readConfig(config_file):
         logging.error("unable to parse the settings file")
@@ -230,7 +230,7 @@ def create(username, givenName, sn, ou, userPassword):
                     givenName,"lastname",sn,"password",hhex,"sha"]
         
         if getUserType(username) == 'STU':
-            command.extend(["org","/students.denison.edu"])
+            command.extend(["org","/students.university.edu"])
         else:
             org = "/" + lookupDivision(ou)
             command.extend(["org",org])
@@ -305,7 +305,7 @@ def update(username, newusername, loginDisabled, givenName, fullName, sn, ou):
         if loginDisabled == "True":
             command.extend(["suspended","on"])
         if getUserType(username) == 'STU':
-            command.extend(["org","/students.denison.edu"])
+            command.extend(["org","/students.university.edu"])
         else:
             org = "/" + lookupDivision(ou)
             command.extend(["org",org])
@@ -407,12 +407,12 @@ def readConfig(config_file):
     # Create primOU-> GA org translation dictionary
         global deptDivision
         deptDivision = {}
-        deptDivision['Admissions'] = 'admin.denison.edu'
-        deptDivision['Art'] = 'academic.denison.edu'
-        deptDivision['Cinema'] = 'academic.denison.edu'
-        deptDivision['Grounds And Roads'] = 'admin.denison.edu'
-        deptDivision['Theatre'] = 'academic.denison.edu'
-        deptDivision['Womens and Gender Studies'] = 'academic.denison.edu'
+        deptDivision['Admissions'] = 'admin.university.edu'
+        deptDivision['Art'] = 'academic.university.edu'
+        deptDivision['Cinema'] = 'academic.university.edu'
+        deptDivision['Grounds And Roads'] = 'admin.universityn.edu'
+        deptDivision['Theatre'] = 'academic.university.edu'
+        deptDivision['Womens and Gender Studies'] = 'academic.university.edu'
         
     except Exception as e:
         logging.error("unable to parse GApps settings file")
